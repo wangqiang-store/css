@@ -11,3 +11,7 @@
 ### Walking-lantern
 
 > anime.js(走马灯)
+
+### swiper
+
+> swiper 动画依赖文件
