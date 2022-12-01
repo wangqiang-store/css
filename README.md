@@ -15,3 +15,7 @@
 ### swiper
 
 > swiper 动画依赖文件
+
+### videojs-hls
+
+> videojs 支持 hls 直播实例
