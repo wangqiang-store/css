@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>animation</title>
+    <style>
+      .container {
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: space-between;
+      }
+      ul {
+        list-style: none;
+      }
+      ul li {
+        --time: calc((var(--index) - 1) * 200ms);
+        width: 20px;
+        height: 200px;
+        border-radius: 4px;
+        background-image: linear-gradient(to bottom, #56b6c2 0%, #d65955 100%);
+        animation: Scale 1.5s ease-in-out var(--time) infinite;
+      }
+      @keyframes Scale {
+        0%,
+        100% {
+          transform: scaleY(1);
+        }
+        50% {
+          transform: scaleY(0.5);
+        }
+      }
+
+      /*  渐变定位 */
+      .track-btn {
+        width: 400px;
+        height: 50px;
+        border-radius: 25px;
+        font-weight: bold;
+        text-align: center;
+        position: relative;
+        background-color: #c678bd;
+        line-height: 50px;
+        color: #fff;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .track-btn::before {
+        --size: 0;
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--size);
+        height: var(--size);
+        background-image: radial-gradient(
+          circle closest-side,
+          #09f,
+          transparent
+        );
+        content: "";
+        transform: translate3d(-50%, -50%, 0);
+        transition: width 200ms ease, height 200ms ease;
+      }
+      .track-btn span {
+        position: relative;
+        pointer-events: none;
+      }
+      .track-btn:hover::before {
+        --size: 400px;
+      }
+
+      /* 文字背景  */
+      .text-image {
+        font-size: 100px;
+        font-weight: 600;
+        text-align: center;
+        background: white url("./235000-1584114600db79.jpg") no-repeat
+          center/100%;
+        color: transparent;
+        margin-top: 10px;
+        text-shadow: 4px 8px 5px rgb(100 100 100 / 50%);
+        -webkit-background-clip: text;
+      }
+
+      /*  移动焦点  */
+      .shadow {
+        width: 800px;
+        height: 500px;
+        text-align: center;
+        position: relative;
+        background-image: url("./235000-1584114600db79.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0 auto;
+        overflow: hidden;
+        --size: 0px;
+      }
+
+      .shadow::after {
+        width: var(--size);
+        height: var(--size);
+        border-radius: 100%;
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        display: block;
+        box-shadow: 0 0 0 999px rgba(0, 0, 0, 0.8);
+        content: "";
+        transform-origin: center;
+        transform: translate(-50%, -50%);
+      }
+      .shadow:hover {
+        --size: 100px;
+        cursor: pointer;
+      }
+
+      /* 放大镜 */
+      .zoomLens {
+        --size: 0px;
+        width: 800px;
+        height: 500px;
+        margin: 0 auto;
+        margin-top: 10px;
+        background-image: url("./235000-1584114600db79.jpg");
+        background-size: cover;
+        overflow: hidden;
+        position: relative;
+      }
+      .zoomLens::before {
+        --offsetX: calc(var(--size) / 2 - var(--x) * 2);
+        --offsetY: calc(var(--size) / 2 - var(--y) * 2);
+        position: absolute;
+        width: var(--size);
+        height: var(--size);
+        left: var(--x);
+        top: var(--y);
+        border-radius: 100%;
+        background: #333 url("./235000-1584114600db79.jpg") no-repeat
+          var(--offsetX) var(--offsetY) / 1600px 1000px;
+        content: "";
+        display: inline-block;
+        transform-origin: center;
+        transform: translate(-50%, -50%);
+      }
+      .zoomLens:hover {
+        --size: 100px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text-image">妙用CSS变量，让你的CSS变得更心动</div>
+
+    <ul class="container">
+      <li style="--index: 1"></li>
+      <li style="--index: 2"></li>
+      <li style="--index: 3"></li>
+      <li style="--index: 4"></li>
+      <li style="--index: 5"></li>
+      <li style="--index: 6"></li>
+    </ul>
+
+    <div class="track-btn">
+      <span>妙用CSS变量，让你的CSS变得更心动</span>
+    </div>
+
+    <div class="shadow" style="--x: 0px; --y: 0px"></div>
+
+    <div class="zoomLens" style="--x: 0px; --y: 0px"></div>
+
+    <script>
+      let ele = document.querySelector(".track-btn");
+      ele.addEventListener("mousemove", (e) => {
+        const x = e.pageX - e.target.offsetLeft;
+        const y = e.pageY - e.target.offsetTop;
+        e.target.style.setProperty("--x", `${x}px`);
+        e.target.style.setProperty("--y", `${y}px`);
+      });
+
+      let ele1 = document.querySelector(".shadow");
+      ele1.addEventListener("mousemove", (e) => {
+        const x = e.pageX - e.target.offsetLeft;
+        const y = e.pageY - e.target.offsetTop;
+        e.target.style.setProperty("--x", `${e.offsetX}px`);
+        e.target.style.setProperty("--y", `${e.offsetY}px`);
+      });
+
+      let ele2 = document.querySelector(".zoomLens");
+      ele2.addEventListener("mousemove", (e) => {
+        let x = e.offsetX;
+        let y = e.offsetY;
+        e.target.style.setProperty("--x", `${x}px`);
+        e.target.style.setProperty("--y", `${y}px`);
+      });
+    </script>
+  </body>
+</html>
