@@ -19,3 +19,16 @@
 ### videojs-hls
 
 > videojs 支持 hls 直播实例
+
+### btnAnimation
+
+> 按钮关灯开灯动画
+
+### ScaleAnimation
+
+> 缩放动画
+
+### JS
+
+- utils
+  > 手写面试题

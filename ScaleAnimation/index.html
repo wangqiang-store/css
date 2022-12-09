@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>animation</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="https://unpkg.com/transition-style" />
+  </head>
+  <body>
+    <div id="root">
+      <!-- 弹跳动画 -->
+      <div class="spring">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <!-- 缩放动画 -->
+      <div class="zoom_container">
+        <div class="zoom">
+          <div class="zoom_left"></div>
+        </div>
+        <div class="zoom">
+          <div class="zoom_right"></div>
+        </div>
+        <div class="zoom">
+          <div class="zoom_top"></div>
+        </div>
+        <div class="zoom">
+          <div class="zoom_bottom"></div>
+        </div>
+      </div>
+
+      <!-- transition.css -->
+      <div class="transition_container">
+        <div class="transition_bg">transition.css</div>
+        <div class="transition" transition-style="out:circle:hesitate">
+          transition.css
+        </div>
+      </div>
+
+      <div class="card"></div>
+    </div>
+  </body>
+</html>
